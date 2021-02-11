@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+      body {
+        background: black;
+      }
+
+      video {
+        width: 100vw;
+        height: 100vh;
+      }
+      .btn {
+        padding: 10px;
+        color: white;
+        display: inline-block;
+        border: 1px solid white;
+        cursor: pointer;
+        position: fixed;
+      }
+    </style>
+  </head>
+
+  <body onClick="playVid();">
+    <div id="btn" class="btn">Touch</div>
+    <video id="cursedVideo" onClick="playVid();" width="100vw" height="100vh">
+      <source src="curse.mp4" type="video/mp4" />
+    </video>
+    <script type="text/javascript">
+      var vid = document.getElementById("cursedVideo");
+      vid.addEventListener("ended", myHandler, false);
+      window.setTimeout(playVid, 5000);
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(
+          /[?&]+([^=&]+)=([^&]*)/gi,
+          function (m, key, value) {
+            vars[key] = value;
+          }
+        );
+        return vars;
+      }
+      var number = getUrlVars()["v"];
+
+      function playVid() {
+        var btn = document.getElementById("btn");
+        btn.parentNode.removeChild(btn);
+        vid.play();
+      }
+
+      function pauseVid() {
+        vid.pause();
+      }
+
+      function myHandler(e) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "http://YOUR-URL/curse.php?v=" + number, true);
+        xhttp.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        );
+        xhttp.send();
+        vid.parentNode.removeChild(vid);
+      }
+    </script>
+  </body>
+</html>

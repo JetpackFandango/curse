@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            background: black;
+            color:white;
+        }
+        h3{
+            color:white;
+        }
+        .area-code{
+            max-width:80px;
+        }
+        form{
+            display:inline-block;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+    <form class="pure-form">
+        <fieldset>
+            <legend>Enter a phone number to generate a cursed link</legend>
+            +1 <input id="area-code" type="text" pattern="\d*" maxlength="3" class="area-code" oninput="convert()" placeholder="Area Code" />
+            <input id="number" type="text" maxlength="8" placeholder="Number" oninput="convert()"/>
+            <label for="default-remember">
+        </fieldset>
+    </form>
+    <div id="link"></div>
+    
+    <script type='text/javascript'>
+        function convert() {
+            var area = document.getElementById("area-code").value;
+            var number = document.getElementById("number").value;
+            number = number.replace('-','');
+            var phone = "" + area + number;           
+            phone = parseInt(phone); 
+            var hex = phone.toString(16);
+            document.getElementById('link').innerHTML = "http://YOUR-URL/?v="+hex;
+        }
+    </script>
+</body>
+
+</html>
